@@ -99,5 +99,6 @@ if img_file_buffer is not None:
 
         style_image = PIL.Image.open(f'./Styles/{NST.style_options[int(style_selection.split(":")[0])]}')
         
-        img = NST.transform_image(img_file_buffer)
+        img = NST.transform_image(img_file_buffer=img_file_buffer,
+                                  style_img=style_image)
         st.image(image=img)
