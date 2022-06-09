@@ -23,14 +23,15 @@ class NeuralStyleTransfer():
 
         self.style_path = '.\Styles'
         #self.style_options = {i: styletype for i, styletype in enumerate(os.listdir(self.style_path))}
-        self.style_options = ('Claude Monet - Water Lillies.jpg' 'Edward Munch - The Scream.jpg'
-                              'Henri Matisse - Woman with a Hat.jpg'
-                              'Hokusai - The Great Wave off Kanagawa.jpg'
-                              'Karel Appel - Femmes, enfants, animaux.jpg'
-                              'Kazimir Malevich - Boer in het Veld.jpeg'
-                              "Leonid Afremov - Rain's Rustle.jpg"
-                              'Vincent van Gogh - Self-Portrait with Grey Felt Hat.jpg'
-                              'Vincent van Gogh - Starry Night.jpg')
+        self.style_options = ['Claude Monet - Water Lillies.jpg',
+                              'Edward Munch - The Scream.jpg',
+                              'Henri Matisse - Woman with a Hat.jpg',
+                              'Hokusai - The Great Wave off Kanagawa.jpg',
+                              'Karel Appel - Femmes, enfants, animaux.jpg',
+                              'Kazimir Malevich - Boer in het Veld.jpeg',
+                              "Leonid Afremov - Rain's Rustle.jpg",
+                              'Vincent van Gogh - Self-Portrait with Grey Felt Hat.jpg',
+                              'Vincent van Gogh - Starry Night.jpg']
         self.hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
 
     def watermark(self, ax, fig, size_divided=6):
@@ -85,6 +86,7 @@ class NeuralStyleTransfer():
 
 img_file_buffer = st.camera_input("Take a picture")
 NST = NeuralStyleTransfer()
+
 
 
 if img_file_buffer is not None:
