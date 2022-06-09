@@ -78,11 +78,10 @@ class NeuralStyleTransfer():
         content_image_tensor = self.image_to_tensor(img=img_file_buffer.getvalue(), 
                                                     img_size=self.content_img_size,
                                                     content=True)
-        st.write(content_image_tensor)
+        
         style_image_tensor = self.image_to_tensor(img=style_img,
                                                   img_size=self.style_img_size)
-        st.write(style_image_tensor)
-
+        
         combined_result = self.hub_module(tf.constant(content_image_tensor), 
                                           tf.constant(style_image_tensor))[0]
 
