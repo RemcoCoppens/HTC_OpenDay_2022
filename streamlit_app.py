@@ -49,9 +49,9 @@ class NeuralStyleTransfer():
         ao.patch.set_alpha(0)
         ax.add_artist(ao)
 
-    def image_to_tensor(self, path_to_img, img_size):
+    def image_to_tensor(self, img_file_buffer, img_size):
         """ Load the image and transform it to a Tensor """
-        img = tf.io.read_file(path_to_img)
+        img = img_file_buffer.getvalue()
         img = tf.image.decode_image(img, channels=3, dtype=tf.float32)
     
         # Resize the image to specific dimensions
@@ -59,7 +59,7 @@ class NeuralStyleTransfer():
         img = img[tf.newaxis, :]
         return img
     
-    def tensor_to_image(self, tensor, plot_img=True):
+    def tensor_to_image(self, tensor, plot_img=False):
         """ Convert the created tensor to an image and show the image """
         tensor = tensor*255
         tensor = np.array(tensor, dtype=np.uint8)
@@ -69,20 +69,21 @@ class NeuralStyleTransfer():
             plt.axis('off')
             return plt.imshow(tensor)
         else:
-            return tensor
+            return tensor.numpy()
     
-    def transform_image(self, content_name):
+    def transform_image(self, img_file_buffer):
         """ Retrieve the content and transform it using the chosen style type """
         style_type = self.style_options[int(input(self.style_options))]
         
-        content_image_tensor = self.image_to_tensor(path_to_img=f"{self.content_path}\{content_name}", 
+        content_image_tensor = self.image_to_tensor(img_file_buffer=img_file_buffer, 
                                                     img_size=self.content_img_size)
         style_image_tensor = self.image_to_tensor(path_to_img=f"{self.style_path}\{style_type}",
                                                   img_size=self.style_img_size)
 
         combined_result = self.hub_module(tf.constant(content_image_tensor), 
                                           tf.constant(style_image_tensor))[0]
-        self.tensor_to_image(combined_result)
+
+        return self.tensor_to_image(combined_result)
 
 img_file_buffer = st.camera_input("Take a picture")
 NST = NeuralStyleTransfer()
@@ -99,4 +100,9 @@ if img_file_buffer is not None:
     if style_selection != '':
         st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])])
 
-        st.write(img_file_buffer)
+        image = PIL.Image.open(f'./Styles/Claude Monet - Water Lillies.jpg')
+        st.image(image)
+
+        # img = NST.transform_image(img_file_buffer)
+
+        # st.image(image=img)
