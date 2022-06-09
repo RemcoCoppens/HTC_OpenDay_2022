@@ -98,7 +98,8 @@ if img_file_buffer is not None:
         st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])])
 
         style_image = PIL.Image.open(f'./Styles/{NST.style_options[int(style_selection.split(":")[0])]}')
-        
+        style_image = np.asarray(style_image).astype('float32')
+
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
         st.image(image=img)
