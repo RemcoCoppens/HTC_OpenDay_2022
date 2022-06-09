@@ -98,4 +98,5 @@ if img_file_buffer is not None:
     
     if style_selection != '':
         st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])])
-    
+
+        st.write(img_file_buffer.getvalue())
