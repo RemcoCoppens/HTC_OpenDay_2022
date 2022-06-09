@@ -93,9 +93,9 @@ style_options = np.insert(style_options, 0, '', axis=0)
 if img_file_buffer is not None:
     # To read image file buffer as a PIL Image:
     style_selection = st.selectbox(label="Select the desired painting style!",
-                                   options=NST.style_options,
+                                   options=style_options,
                                    format_func=lambda x: 'Select a painting style' if x == '' else x)
     
     if style_selection != '':
-        st.write('You selected: ', style_selection)
+        st.write('You selected: ', style_options[int(style_selection.split(':')[0])])
     
