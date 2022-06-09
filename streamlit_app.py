@@ -51,7 +51,7 @@ class NeuralStyleTransfer():
 
     def image_to_tensor(self, img, img_size):
         """ Load the image and transform it to a Tensor """
-        img = tf.image.decode_image(img, channels=3, dtype=tf.float32)
+        img = tf.io.decode_image(img, channels=3, dtype=tf.float32)
     
         # Resize the image to specific dimensions
         img = tf.image.resize(img, img_size, preserve_aspect_ratio=True)
