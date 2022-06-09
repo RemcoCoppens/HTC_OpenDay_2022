@@ -71,7 +71,7 @@ class NeuralStyleTransfer():
             plt.axis('off')
             return plt.imshow(tensor)
         else:
-            return tensor.numpy()
+            return tensor
     
     def transform_image(self, img_file_buffer, style_img):
         """ Retrieve the content and transform it using the chosen style type """        
