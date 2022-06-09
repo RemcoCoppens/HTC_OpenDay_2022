@@ -49,9 +49,8 @@ class NeuralStyleTransfer():
         ao.patch.set_alpha(0)
         ax.add_artist(ao)
 
-    def image_to_tensor(self, img_file_buffer, img_size):
+    def image_to_tensor(self, img, img_size):
         """ Load the image and transform it to a Tensor """
-        img = img_file_buffer.getvalue()
         img = tf.image.decode_image(img, channels=3, dtype=tf.float32)
     
         # Resize the image to specific dimensions
@@ -71,13 +70,11 @@ class NeuralStyleTransfer():
         else:
             return tensor.numpy()
     
-    def transform_image(self, img_file_buffer):
-        """ Retrieve the content and transform it using the chosen style type """
-        style_type = self.style_options[int(input(self.style_options))]
-        
-        content_image_tensor = self.image_to_tensor(img_file_buffer=img_file_buffer, 
+    def transform_image(self, img_file_buffer, style_img):
+        """ Retrieve the content and transform it using the chosen style type """        
+        content_image_tensor = self.image_to_tensor(img=img_file_buffer.getvalue(), 
                                                     img_size=self.content_img_size)
-        style_image_tensor = self.image_to_tensor(path_to_img=f"{self.style_path}\{style_type}",
+        style_image_tensor = self.image_to_tensor(img=style_img,
                                                   img_size=self.style_img_size)
 
         combined_result = self.hub_module(tf.constant(content_image_tensor), 
@@ -100,9 +97,7 @@ if img_file_buffer is not None:
     if style_selection != '':
         st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])])
 
-        image = PIL.Image.open(f'./Styles/{NST.style_options[int(style_selection.split(":")[0])]}')
-        st.image(image)
-
-        # img = NST.transform_image(img_file_buffer)
-
-        # st.image(image=img)
+        style_image = PIL.Image.open(f'./Styles/{NST.style_options[int(style_selection.split(":")[0])]}')
+        
+        img = NST.transform_image(img_file_buffer)
+        st.image(image=img)
