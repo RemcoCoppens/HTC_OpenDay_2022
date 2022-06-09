@@ -92,5 +92,5 @@ style_options = np.array(NST.style_options)
 
 if img_file_buffer is not None:
     # To read image file buffer as a PIL Image:
-    style_selection = st.selectbox(label="Select the desired painting style!",
-                                   options=style_options)
+    style_selection = st.multiselect(label="Select the desired painting style!",
+                                     options=style_options)
