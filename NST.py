@@ -101,7 +101,7 @@ class NeuralStyleTransfer():
             images.append(self.tensor_to_image(tensor=combined_result, 
                                                plot_img=False))
             if saveArt:
-                os.mkdir(f".\Output\{style_type.split(".")[0]}_{date.today}")
+                os.mkdir(f".\Output\{style_type.split('.')[0]}_{date.today}")
                 _, ax = plt.subplots(figsize=(15, 15))
                 ax.imshow(images[-1])
                 ax.axis('off')
@@ -182,9 +182,9 @@ class NeuralStyleTransfer():
 
 
 
-NST = NeuralStyleTransfer()
+# NST = NeuralStyleTransfer()
 
-# NST._RUN()
+# # NST._RUN()
 
-NST.transform_bulk()
+# NST.transform_bulk()
 
