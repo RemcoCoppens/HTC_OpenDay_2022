@@ -49,9 +49,12 @@ class NeuralStyleTransfer():
         ao.patch.set_alpha(0)
         ax.add_artist(ao)
 
-    def image_to_tensor(self, img, img_size):
+    def image_to_tensor(self, img, img_size, content=False):
         """ Load the image and transform it to a Tensor """
-        img = tf.image.decode_image(img, channels=3, dtype=tf.float32)
+        if content:
+            img = tf.image.decode_image(img, channels=3, dtype=tf.float32)
+        else:
+            img = tf.convert_to_tensor(img, dtype=tf.int64)
     
         # Resize the image to specific dimensions
         img = tf.image.resize(img, img_size, preserve_aspect_ratio=True)
@@ -73,7 +76,8 @@ class NeuralStyleTransfer():
     def transform_image(self, img_file_buffer, style_img):
         """ Retrieve the content and transform it using the chosen style type """        
         content_image_tensor = self.image_to_tensor(img=img_file_buffer.getvalue(), 
-                                                    img_size=self.content_img_size)
+                                                    img_size=self.content_img_size,
+                                                    content=True)
         style_image_tensor = self.image_to_tensor(img=style_img,
                                                   img_size=self.style_img_size)
 
