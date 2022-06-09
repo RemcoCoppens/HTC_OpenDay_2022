@@ -88,11 +88,14 @@ img_file_buffer = st.camera_input("Take a picture")
 NST = NeuralStyleTransfer()
 
 style_options = np.array([f'{idx}: {name}' for idx, name in enumerate(NST.style_options)])
+style_options = np.insert(style_options, 0, '', axis=0)
 
 if img_file_buffer is not None:
     # To read image file buffer as a PIL Image:
     style_selection = st.selectbox(label="Select the desired painting style!",
-                                   options=NST.style_options)
+                                   options=NST.style_options,
+                                   format_func=lambda x: 'Select a painting style' if x == '' else x)
     
-    st.write('You selected: ', style_selection)
+    if style_selection != '':
+        st.write('You selected: ', style_selection)
     
