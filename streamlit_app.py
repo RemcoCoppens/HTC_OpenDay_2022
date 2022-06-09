@@ -23,17 +23,15 @@ class NeuralStyleTransfer():
 
         self.style_path = '.\Styles'
         #self.style_options = {i: styletype for i, styletype in enumerate(os.listdir(self.style_path))}
-        self.style_options = ['Claude Monet - Water Lillies.jpg' 'Edward Munch - The Scream.jpg'
+        self.style_options = ('Claude Monet - Water Lillies.jpg' 'Edward Munch - The Scream.jpg'
                               'Henri Matisse - Woman with a Hat.jpg'
                               'Hokusai - The Great Wave off Kanagawa.jpg'
                               'Karel Appel - Femmes, enfants, animaux.jpg'
                               'Kazimir Malevich - Boer in het Veld.jpeg'
                               "Leonid Afremov - Rain's Rustle.jpg"
                               'Vincent van Gogh - Self-Portrait with Grey Felt Hat.jpg'
-                              'Vincent van Gogh - Starry Night.jpg']
+                              'Vincent van Gogh - Starry Night.jpg')
         self.hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
-        
-        print(f'-- Setup Completed --')
 
     def watermark(self, ax, fig, size_divided=6):
         img = PIL.Image.open('Logo_Datacation.png')
@@ -88,9 +86,8 @@ class NeuralStyleTransfer():
 img_file_buffer = st.camera_input("Take a picture")
 NST = NeuralStyleTransfer()
 
-style_options = np.array(NST.style_options)
 
 if img_file_buffer is not None:
     # To read image file buffer as a PIL Image:
-    style_selection = st.multiselect(label="Select the desired painting style!",
-                                     options=style_options)
+    style_selection = st.selectbox(label="Select the desired painting style!",
+                                   options=NST.style_options)
