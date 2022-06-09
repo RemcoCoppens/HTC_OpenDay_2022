@@ -100,7 +100,7 @@ if img_file_buffer is not None:
     if style_selection != '':
         st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])])
 
-        image = PIL.Image.open(f'./Styles/Claude Monet - Water Lillies.jpg')
+        image = PIL.Image.open(f'./Styles/{NST.style_options[int(style_selection.split(":")[0])]}')
         st.image(image)
 
         # img = NST.transform_image(img_file_buffer)
