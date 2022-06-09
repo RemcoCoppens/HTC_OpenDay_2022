@@ -88,9 +88,7 @@ class NeuralStyleTransfer():
 img_file_buffer = st.camera_input("Take a picture")
 NST = NeuralStyleTransfer()
 
-style_options = np.array([style for style in NST.style_options.values()])
-
-print(style_options)
+style_options = np.array(NST.style_options)
 
 if img_file_buffer is not None:
     # To read image file buffer as a PIL Image:
