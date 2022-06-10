@@ -109,6 +109,9 @@ if img_file_buffer is not None:
                                   style_img=style_image)
 
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpg'
+        with fs.open(f's3://openday2022streamlit/{fn}') as f:
+            f.write(PIL.Image.fromarray(img))
+
         img.save(fs.open(f's3://openday2022streamlit/{fn}', 'wb'), 'JPG')
         
         fig, ax = plt.subplots(figsize=(15, 15))
