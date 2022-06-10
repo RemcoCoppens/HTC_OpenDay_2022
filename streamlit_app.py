@@ -121,7 +121,7 @@ if img_file_buffer is not None:
         ax.imshow(img)
         ax.axis('off')
         NST.watermark(ax, fig)
-        plt.savefig(img, format='png')
+        plt.savefig(img)
 
         btn = st.download_button(
             label="Download artwork",
