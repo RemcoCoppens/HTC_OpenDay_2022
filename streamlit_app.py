@@ -14,7 +14,7 @@ import tensorflow_hub as hub
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
-fs = s3fs.S3FileSystem(anon=False)
+s3 = s3fs.S3FileSystem(anon=False)
 
 class NeuralStyleTransfer():
     def __init__(self):
@@ -109,7 +109,7 @@ if img_file_buffer is not None:
                                   style_img=style_image)
 
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpg'
-        with fs.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}') as f:
+        with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}') as f:
             f.write(PIL.Image.fromarray(img))
         
         fig, ax = plt.subplots(figsize=(15, 15))
