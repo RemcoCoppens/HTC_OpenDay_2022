@@ -1,10 +1,11 @@
+import imghdr
 import streamlit as st
 
 # import os
 import math
 import time
 import numpy as np
-from datetime import date
+from datetime import date, datetime
 
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (OffsetImage,AnchoredOffsetbox)
@@ -108,3 +109,6 @@ if img_file_buffer is not None:
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
         st.image(image=img)
+
+        with open(f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}', "wb") as f:
+            f.write(img.getbuffer())
