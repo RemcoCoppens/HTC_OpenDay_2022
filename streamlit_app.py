@@ -108,7 +108,9 @@ if img_file_buffer is not None:
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
 
-        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpg'
+        st.write(type(PIL.Image.fromarray(img)))
+
+        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpeg'
         with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}', 'wb') as f:
             f.write(PIL.Image.fromarray(img))
         
