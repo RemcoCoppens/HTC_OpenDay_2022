@@ -125,14 +125,3 @@ if img_file_buffer is not None:
                 file_name=fn,
                 mime="image/png"
             )
-
-
-
-
-        # with open(os.path.join(f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}', "wb") as f:
-        #     f.write(img)
-
-        # plt.figure(figsize=(20,10))
-        # plt.axis('off')
-        # plt.imshow(img)
-        # plt.savefig(f'./SavedArt/Photo_{datetime.now().strftime("%H:%M:%S.%f")}')
