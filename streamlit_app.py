@@ -1,4 +1,5 @@
 import streamlit as st
+import s3fs
 
 import numpy as np
 from datetime import datetime
@@ -12,6 +13,8 @@ import tensorflow_hub as hub
 
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
+fs = s3fs.S3FileSystem(anon=False)
 
 class NeuralStyleTransfer():
     def __init__(self):
@@ -97,22 +100,22 @@ if img_file_buffer is not None:
                                    format_func=lambda x: 'Select a painting style' if x == '' else x)
     
     if style_selection != '':
-        st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])].split('.')[0], "Let's paint!")
+        st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])].split('.')[0], ".... Let's paint!")
 
         style_image = PIL.Image.open(f'./Styles/{NST.style_options[int(style_selection.split(":")[0])]}')
         style_image = np.asarray(style_image).astype('float32')
 
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
+
+        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpg'
+        img.save(fs.open(f's3://openday2022streamlit/{fn}', 'wb'), 'JPG')
         
         fig, ax = plt.subplots(figsize=(15, 15))
         ax.imshow(img)
         ax.axis('off')
         NST.watermark(ax, fig)
         st.pyplot(fig)
-
-        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpg'
-        fig.savefig(fn)
 
         with open(fn, "rb") as art:
             btn = st.download_button(
@@ -121,6 +124,7 @@ if img_file_buffer is not None:
                 file_name=fn,
                 mime="image/png"
             )
+
 
 
 
