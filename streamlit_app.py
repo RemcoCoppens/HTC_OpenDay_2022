@@ -89,7 +89,7 @@ class NeuralStyleTransfer():
 img_file_buffer = st.camera_input("Take a picture")
 NST = NeuralStyleTransfer()
 
-style_options = np.array([f'{idx}: {name.split('.')[0]}' for idx, name in enumerate(NST.style_options)])
+style_options = np.array([f'{idx}: {name.split(".")[0]}' for idx, name in enumerate(NST.style_options)])
 style_options = np.insert(style_options, 0, '', axis=0)
 
 if img_file_buffer is not None:
