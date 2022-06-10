@@ -176,10 +176,10 @@ if img_file_buffer is not None:
         NST.watermark(ax, fig)
         st.pyplot(fig)
 
-        # with open(fn, "rb") as art:
-        #     btn = st.download_button(
-        #         label="Download artwork",
-        #         data=art,
-        #         file_name=fn,
-        #         mime="image/png"
-        #     )
+        with open(fn, "rb") as art:
+            btn = st.download_button(
+                label="Download artwork",
+                data=art,
+                file_name=fn,
+                mime="image/png"
+            )
