@@ -12,7 +12,7 @@ def read_image(filename):
 def bytes_to_image(bytes):
     return Image.open(io.BytesIO(bytes))
 
-fs = s3fs.S3FileSystem(anon=False, key='AKIAURWCWV3XI4CKEWGH', secret='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')
+fs = s3fs.S3FileSystem(anon=False)
 
 
 st.markdown("# Gallery 📸")
