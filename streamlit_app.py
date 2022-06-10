@@ -1,11 +1,9 @@
-import imghdr
 import streamlit as st
 
 import os
-import math
-import time
+import io
 import numpy as np
-from datetime import date, datetime
+from datetime import datetime
 
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (OffsetImage,AnchoredOffsetbox)
@@ -108,14 +106,24 @@ if img_file_buffer is not None:
 
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
-        st.image(image=img)
+        # st.image(image=img)
 
         fig, ax = plt.subplots(figsize=(15, 15))
         ax.imshow(img)
         ax.axis('off')
         NST.watermark(ax, fig)
         st.pyplot(fig)
-        
+
+        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}'
+        img = io.BytesIO()
+        plt.savefig(img, format='png')
+
+        btn = st.download_button(
+            label="Download artwork",
+            data=img,
+            file_name=fn,
+            mime="image/png"
+        )
 
 
 
