@@ -110,12 +110,10 @@ if img_file_buffer is not None:
                                   style_img=style_image)
 
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpeg'
-        with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}', 'w') as f:
-            f.write(PIL.Image.fromarray(img))
-            
-            # img_byte_arr = io.BytesIO()
-            # PIL.Image.fromarray(img).save(img_byte_arr, format='JPEG')
-            # f.write(img_byte_arr.getvalue())
+        with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}', 'wb') as f:           
+            img_byte_arr = io.BytesIO()
+            PIL.Image.fromarray(img).save(img_byte_arr, format='JPEG')
+            f.write(img_byte_arr.getvalue())
         
         fig, ax = plt.subplots(figsize=(15, 15))
         ax.imshow(img)
