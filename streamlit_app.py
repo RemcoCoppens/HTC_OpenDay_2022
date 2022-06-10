@@ -106,16 +106,15 @@ if img_file_buffer is not None:
 
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
-        # st.image(image=img)
+        
+        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}'
 
         fig, ax = plt.subplots(figsize=(15, 15))
         ax.imshow(img)
         ax.axis('off')
         NST.watermark(ax, fig)
-        st.pyplot(fig)
-
-        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}'
         plt.savefig(fn)
+        st.pyplot(fig)
 
         with open(fn, "rb") as art:
             btn = st.download_button(
