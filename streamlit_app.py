@@ -115,20 +115,15 @@ if img_file_buffer is not None:
         st.pyplot(fig)
 
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}'
-        img = io.BytesIO()
+        plt.savefig(fn)
 
-        fig, ax = plt.subplots(figsize=(15, 15))
-        ax.imshow(img)
-        ax.axis('off')
-        NST.watermark(ax, fig)
-        plt.savefig(img)
-
-        btn = st.download_button(
-            label="Download artwork",
-            data=img,
-            file_name=fn,
-            mime="image/png"
-        )
+        with open(fn, "rb") as img:
+            btn = st.download_button(
+                label="Download artwork",
+                data=img,
+                file_name=fn,
+                mime="image/png"
+            )
 
 
 
