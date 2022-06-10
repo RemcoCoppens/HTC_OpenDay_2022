@@ -113,6 +113,7 @@ if img_file_buffer is not None:
         fig, ax = plt.subplots(figsize=(15, 15))
         ax.imshow(img)
         ax.axis('off')
+        NST.watermark(ax, fig)
         st.pyplot(fig)
         
 
