@@ -112,7 +112,7 @@ if img_file_buffer is not None:
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpeg'
         with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}', 'wb') as f:
             img_byte_arr = io.BytesIO()
-            PIL.Image.fromarray(img).save(img_byte_arr, format='PNG')
+            PIL.Image.fromarray(img).save(img_byte_arr, format='JPEG')
             f.write(img_byte_arr.getvalue())
         
         fig, ax = plt.subplots(figsize=(15, 15))
