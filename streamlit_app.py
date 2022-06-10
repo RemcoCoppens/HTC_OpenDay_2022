@@ -110,5 +110,7 @@ if img_file_buffer is not None:
                                   style_img=style_image)
         st.image(image=img)
 
-        with open(f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}', "wb") as f:
-            f.write(img.getbuffer())
+        plt.figure(figsize=(20,10))
+        plt.axis('off')
+        plt.imshow(img)
+        plt.savefig(f'./SavedArt/Photo_{datetime.now().strftime("%H:%M:%S.%f")}')
