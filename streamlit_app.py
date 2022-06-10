@@ -39,7 +39,7 @@ class NeuralStyleTransfer():
         wm_height = int(float(img.size[1])*float(scaling))
         img = img.resize((wm_width, wm_height), PIL.Image.ANTIALIAS)
 
-        imagebox = OffsetImage(img, zoom=1, alpha=2.0) #1.0
+        imagebox = OffsetImage(img, zoom=1, alpha=1.0)
         imagebox.image.axes = ax
 
         ao = AnchoredOffsetbox(4, pad=0.01, borderpad=0, child=imagebox)
