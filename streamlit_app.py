@@ -116,6 +116,11 @@ if img_file_buffer is not None:
 
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}'
         img = io.BytesIO()
+
+        fig, ax = plt.subplots(figsize=(15, 15))
+        ax.imshow(img)
+        ax.axis('off')
+        NST.watermark(ax, fig)
         plt.savefig(img, format='png')
 
         btn = st.download_button(
