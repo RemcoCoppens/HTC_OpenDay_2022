@@ -1,6 +1,7 @@
 import streamlit as st
 import s3fs
 
+import io
 import numpy as np
 from datetime import datetime
 
@@ -108,11 +109,11 @@ if img_file_buffer is not None:
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
 
-        st.write(type(PIL.Image.fromarray(img)))
-
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpeg'
         with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}', 'wb') as f:
-            f.write(PIL.Image.fromarray(img))
+            img_byte_arr = io.BytesIO()
+            PIL.Image.fromarray(img).save(img_byte_arr, format='PNG')
+            f.write(img_byte_arr.getvalue())
         
         fig, ax = plt.subplots(figsize=(15, 15))
         ax.imshow(img)
