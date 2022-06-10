@@ -1,7 +1,7 @@
 import imghdr
 import streamlit as st
 
-# import os
+import os
 import math
 import time
 import numpy as np
@@ -110,8 +110,16 @@ if img_file_buffer is not None:
                                   style_img=style_image)
         st.image(image=img)
 
-        with open(f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}', "wb") as f:
-            f.write(img)
+        fig, ax = plt.subplots(figsize=(15, 15))
+        ax.imshow(img)
+        ax.axis('off')
+        st.pyplot(fig)
+        
+
+
+
+        # with open(os.path.join(f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}', "wb") as f:
+        #     f.write(img)
 
         # plt.figure(figsize=(20,10))
         # plt.axis('off')
