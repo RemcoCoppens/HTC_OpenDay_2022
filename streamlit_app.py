@@ -117,10 +117,10 @@ if img_file_buffer is not None:
         fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}'
         plt.savefig(fn)
 
-        with open(fn, "rb") as img:
+        with open(fn, "rb") as art:
             btn = st.download_button(
                 label="Download artwork",
-                data=img,
+                data=art,
                 file_name=fn,
                 mime="image/png"
             )
