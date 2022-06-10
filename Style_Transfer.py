@@ -11,9 +11,50 @@ import PIL.Image
 
 import tensorflow as tf
 import tensorflow_hub as hub
-
+import base64
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
+
+
+LOGO_IMAGE = "Datacation_Logo_Wit.png"
+
+
+
+
+
+
+STYLES = ["""
+            <style>
+            header {visibility: hidden;}
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """, """
+            <style>
+            .footer_img {
+                max-width: 15%;
+                height: auto;
+                
+            } 
+            .footer {
+            position: fixed;
+            left: 5;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            margin-bottom: 45px;
+            }
+            </style>
+            """]
+
+FOOTER = f"""
+            <div class="footer">
+            <p> </p>
+            <img src="data:image/png;base64,{base64.b64encode(open(LOGO_IMAGE, "rb").read()).decode()}" class=footer_img alt="Dedicated to data!";"
+            </div>
+        """
+        
 
 s3 = s3fs.S3FileSystem(anon=False)
 
@@ -88,6 +129,20 @@ class NeuralStyleTransfer():
 
         return self.tensor_to_image(combined_result)
 
+st.set_page_config(
+    page_title="Style Transfer 🎨",
+    page_icon="🎨",
+    initial_sidebar_state="collapsed")
+
+st.markdown("# Style Transfer 🎨")
+st.sidebar.markdown("# Style Transfer 🎨")
+
+
+for style in STYLES:
+    st.markdown(style, unsafe_allow_html=True) 
+st.sidebar.markdown(FOOTER, unsafe_allow_html=True)
+
+
 img_file_buffer = st.camera_input("Take a picture")
 NST = NeuralStyleTransfer()
 
@@ -121,10 +176,10 @@ if img_file_buffer is not None:
         NST.watermark(ax, fig)
         st.pyplot(fig)
 
-        with open(fn, "rb") as art:
-            btn = st.download_button(
-                label="Download artwork",
-                data=art,
-                file_name=fn,
-                mime="image/png"
-            )
+        # with open(fn, "rb") as art:
+        #     btn = st.download_button(
+        #         label="Download artwork",
+        #         data=art,
+        #         file_name=fn,
+        #         mime="image/png"
+        #     )
