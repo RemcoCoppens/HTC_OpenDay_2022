@@ -1,7 +1,5 @@
 import streamlit as st
 
-import os
-import io
 import numpy as np
 from datetime import datetime
 
@@ -66,7 +64,7 @@ class NeuralStyleTransfer():
         tensor = np.array(tensor, dtype=np.uint8)
         tensor = tensor[0]
         if plot_img:
-            plt.figure(figsize=(20,10))
+            plt.figure(figsize=(15,15))
             plt.axis('off')
             return plt.imshow(tensor)
         else:
