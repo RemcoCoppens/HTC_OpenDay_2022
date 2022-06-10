@@ -99,7 +99,7 @@ if img_file_buffer is not None:
                                    format_func=lambda x: 'Select a painting style' if x == '' else x)
     
     if style_selection != '':
-        st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])])
+        st.write('You selected: ', NST.style_options[int(style_selection.split(':')[0])].split('.')[0], "Let's paint!")
 
         style_image = PIL.Image.open(f'./Styles/{NST.style_options[int(style_selection.split(":")[0])]}')
         style_image = np.asarray(style_image).astype('float32')
