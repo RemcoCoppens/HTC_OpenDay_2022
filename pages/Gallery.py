@@ -23,6 +23,7 @@ files = fs.ls('openday2022streamlit/Fotos_HTCopenday2022')[-12:]
 bytes = [read_image(file) for file in files if file.endswith('.jpeg')]
 images = [bytes_to_image(img) for img in bytes if len(img) > 0]
 
+# Rerun
 with col1:
     for i, image in enumerate(images):
         if i % 3 == 0:
