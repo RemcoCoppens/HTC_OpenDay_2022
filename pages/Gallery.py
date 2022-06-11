@@ -19,7 +19,7 @@ st.markdown("# Gallery 📸")
 st.sidebar.markdown("# Gallery 📸")
 col1, col2, col3, col4 = st.columns(4)
 
-files = fs.ls('openday2022streamlit/Fotos_HTCopenday2022')[100:112]
+files = fs.ls('openday2022streamlit/Fotos_HTCopenday2022')[130:142]
 bytes = [read_image(file) for file in files if file.endswith('.jpeg')]
 images = [bytes_to_image(img) for img in bytes if len(img) > 0]
 
