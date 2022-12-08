@@ -164,11 +164,11 @@ if img_file_buffer is not None:
         img = NST.transform_image(img_file_buffer=img_file_buffer,
                                   style_img=style_image)
 
-        fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpeg'
-        with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}', 'wb') as f:           
-            img_byte_arr = io.BytesIO()
-            PIL.Image.fromarray(img).save(img_byte_arr, format='JPEG')
-            f.write(img_byte_arr.getvalue())
+        # fn = f'Photo_{datetime.now().strftime("%H:%M:%S.%f")}.jpeg'
+        # with s3.open(f's3://openday2022streamlit/Fotos_HTCopenday2022/{fn}', 'wb') as f:           
+        #     img_byte_arr = io.BytesIO()
+        #     PIL.Image.fromarray(img).save(img_byte_arr, format='JPEG')
+        #     f.write(img_byte_arr.getvalue())
         
         fig, ax = plt.subplots(figsize=(15, 15))
         ax.imshow(img)
